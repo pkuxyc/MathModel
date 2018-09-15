@@ -107,7 +107,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 %% Document Layout
 % 页面布局
 \geometry{top=25.4mm,bottom=25.4mm,left=31.8mm,right=31.8mm,headsep=8mm}
-\renewcommand*{\baselinestretch}{1.38}
+\renewcommand*{\baselinestretch}{1.0}
 % 修改tabular 环境, 设置表格中的行间距为正文行间距.
 \let\mcm@oldtabular\tabular
 \let\mcm@endoldtabular\endtabular
@@ -120,20 +120,25 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \setlength\parindent{2em}
 % 设置字体
 \setmainfont{Times New Roman}
+%\setmainfont{STSong}
 \setmonofont{Courier New}
 \setsansfont{Arial}
 
-\setCJKfamilyfont{zhkai}{STKaiti}
+%\setCJKmainfont{\heiti}{ \heiti }
 
+%\setCJKfamilyfont{zhkai}{STKaiti}
+%\setCJKfamilyfont{zhsong}{STSong}
 %
 %\setCJKfamilyfont{zhyou}{YouYuan}
+
 \ifx\lishu\undefined%
  \setCJKfamilyfont{zhsong}{STSong}
- \newcommand*{\lishu}{\CJKfamily{zhsong}} %% Do this if it is undefined
+ \newcommand*{\lishu}{\CJKfamily{zhsong}}
+ %\newcommand*{\lishu}{\CJKfamily{zhsong}} %% Do this if it is undefined
 \else
   %% Do this if it is defined
 \fi
-\newcommand*{\xinwei}{\CJKfamily{zhkai}} 
+\newcommand*{\xinwei}{\heiti} 
 %\newcommand*{\lishu}{\CJKfamily{zhli}}
 
 \renewcommand\normalsize{%
@@ -287,23 +292,25 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 	\makeothertitle
 	}
 \def\ge@maketitle{%
-  \newpage
+  \setcounter{page}{0} 
+  \thispagestyle{empty}
+  %\newpage
   \if@mcm@preface
-  \null\hfill {\lishu  参赛密码 \uline{\quad \qquad\qquad\qquad }}\\
-  \null\hfill { \lishu（由组委会填写）}
+ %\null\hfill {\lishu  参赛密码 \uline{\quad \qquad\qquad\qquad }}\\
+  %\null\hfill { \lishu（由组委会填写）}
  \vskip1cm
  
  \begin{center}
-{\includegraphics[width=4cm]{logo}}
- \vskip.5\baselineskip
+{\includegraphics[width=11cm]{logo}}
+ \vskip1.5\baselineskip
  
  {\xinwei\zihao{2} \mcm@ges@string@contents \par}
  \end{center}
  
- \vskip4em
+ \vskip2em
  
   \thispagestyle{gmcmheadings} 
-   \renewcommand\arraystretch{1.2}
+   \renewcommand\arraystretch{1.5}
  \noindent \begin{tabularx}{\textwidth}{lX}
   \zihao{3}\heiti 学\qquad 校&\zihao{3}\heiti\mcm@tokens@schoolname\\
   \hline\\
@@ -322,17 +329,19 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 	}
 
 \def\makenametitle{
-\newpage%\setcounter{page}{1}
- \null\hfill {\lishu  参赛密码 \uline{\quad \qquad\qquad\qquad }}\\
-  \null\hfill { \lishu（由组委会填写）}
-\vskip1cm
+\newpage\setcounter{page}{1}
+ %\null\hfill {\lishu  参赛密码 \uline{\quad \qquad\qquad\qquad }}\\
+  %\null\hfill { \lishu（由组委会填写）}
+\vskip4\baselineskip
 \begin{center}
-{\includegraphics[width=4cm]{logo}}
+%{\includegraphics[width=4cm]{logo}}
 
-\vskip.5\baselineskip%
-{\xinwei\zihao{2} \mcm@ges@string@contents \par}
+\vskip4\baselineskip%
+{\vskip4\baselineskip%
+\xinwei\zihao{2} \vskip4\baselineskip \mcm@ges@string@contents \par}
 \end{center}
  
+ \vskip2\baselineskip
 \begin{center}\begin{tabularx}{.8\textwidth}{lX}
 {\zihao{3}\heiti 题\qquad 目} &\hfill\zihao{-3}\heiti \@title\hfill\null\\
 \cline{2-2}
@@ -344,10 +353,10 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \def\@oddfoot{\hfil\rm\zihao{-5}\songti\thepage\hfil}%
 \let\@evenfoot\@oddfoot%
     \def\@evenhead{\vbox{%
-            \vskip 3.2mm%
-            \hbox to \textwidth {\hfill\small\heiti “xxx”第十五届中国研究生数学建模竞赛\qquad \smash{\includegraphics{logo2}} \hfill}%
-			\vskip 1.5mm%
-            \hrule width\textwidth height0.12 true mm\vskip0.85pt%
+          %  \vskip 1.2mm%
+            %\hbox to \textwidth {\hfill\small\heiti “华为杯”第十五届中国研究生数学建模竞赛\qquad \smash{\includegraphics{logo}} \hfill}%
+			%\vskip 1.5mm%
+      %      \hrule width\textwidth height0.12 true mm\vskip0.85pt%
         }%
 	}
 	\let\@oddhead\@evenhead%
@@ -555,7 +564,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*\mcm@commit@string@headname{赛区评阅编号（由赛区组委会填写）：}
 \newcommand*\mcm@commit@string@titlea{\the\year 高教社杯全国大学生数学建模竞赛}
 \newcommand*\mcm@commit@string@titleb{承\hspace{1em}诺\hspace{1em}书}
-\newcommand\mcm@ges@string@contents{“xxx”第十五届全国研究生\par 数学建模竞赛}
+\newcommand\mcm@ges@string@contents{“华为杯”第十五届中国研究生\par 数学建模竞赛}
 \newcommand\mcm@commit@string@contents{\quotation
  我们仔细阅读了《全国大学生数学建模竞赛章程》和《全国大学生数学建模竞赛参赛规则》%
 \hspace*{-0.6em}（以下简称为“竞赛章程和参赛规则”，\hspace{-0.2em}可从全国大学生数学建模竞赛网站下载）。
